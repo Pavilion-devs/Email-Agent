@@ -1,0 +1,337 @@
+favourolaboye@Favours-MacBook-Pro Email automation % streamlit run main.py
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8501
+  Network URL: http://192.168.1.4:8501
+
+  For better performance, install the Watchdog module:
+
+  $ xcode-select --install
+  $ pip install watchdog
+            
+Starting Smart Email Assistant...
+Initializing Smart Email Assistant...
+Please visit this URL to authorize this application: https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=835082581514-bt6mo1ohorkaci4emsnl9mocb8rubjeg.apps.googleusercontent.com&redirect_uri=http%3A%2F%2Flocalhost%3A52326%2F&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fgmail.readonly+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fgmail.send+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fgmail.labels+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fgmail.modify&state=8ZQWQFZZuihDsCSKTAvMIKOXkLpOMJ&access_type=offline
+Warning: Calendar credentials not found. Meeting scheduling will be limited.
+✅ Smart Email Assistant initialized successfully!
+
+🚀 Starting Smart Email Assistant workflow...
+
+📧 Fetching emails...
+Fetching up to 50 recent emails...
+Retrieved 50 emails
+📊 Email Summary:
+   Total: 50
+   Unread: 48
+   Top senders: techpoint@digest.bfnewsletters.com, hthieblot@user.luma-mail.com, team@m.ngrok.com
+
+🤖 Processing 50 emails through AI agents...
+
+--- Processing email 1/50 ---
+Subject: Wednesday Wahala Jide’s Is Back at it!...
+From: The Nest Innovation Technology Park <office@thenest.ng>
+📂 Category: Newsletters
+
+--- Processing email 2/50 ---
+Subject: ....
+From: "Dr. Anderson from CVH" <contact@carevaluehealth.com>
+📂 Category: Promotions
+
+--- Processing email 3/50 ---
+Subject: CodeSquad 2026 Admission Process...
+From: "Andrew | CodeSquad" <info@codesquad.org>
+📂 Category: Promotions
+📅 Meeting request detected!
+
+--- Processing email 4/50 ---
+Subject: Favour, you’re on a roll on LinkedIn!...
+From: LinkedIn <messages-noreply@linkedin.com>
+📂 Category: Newsletters
+
+--- Processing email 5/50 ---
+Subject: swipe right...
+From: "Pat @ Starter Story" <pat@starterstory.com>
+📂 Category: Newsletters
+
+--- Processing email 6/50 ---
+Subject: Advice for the Next Generation of Startup Founders...
+From: a16z speedrun <speedrun@substack.com>
+📂 Category: Newsletters
+
+--- Processing email 7/50 ---
+Subject: Four Instant Cheat Codes for Underclassmen 🎮...
+From: The Acely Edge <info@m.acely.ai>
+📂 Category: Newsletters
+
+--- Processing email 8/50 ---
+Subject: Scholarships Near Me (July 30, 2025)...
+From: The Scholarship Collective <sade@thescholarshipcollective.com>
+📂 Category: Newsletters
+
+--- Processing email 9/50 ---
+Subject: Raffia from head to toe...
+From: Etsy <email@email.etsy.com>
+📂 Category: Promotions
+Error determining response need: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4 in organization org-7rF0nKyyQWYXcRts74Nh3dFb on tokens per min (TPM): Limit 10000, Used 10000, Requested 195. Please try again in 1.17s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+--- Processing email 10/50 ---
+Subject: Wednesday Web Drop...
+From: Mobbin <newsletter@mobbin.com>
+📂 Category: Newsletters
+
+--- Processing email 11/50 ---
+Subject: 🦎🚀 No sleep for tokenized stocks? 🕰️...
+From: CoinGecko <hello@coingecko.com>
+📂 Category: Newsletters
+
+--- Processing email 12/50 ---
+Subject: Edit text and images in your PDF from anywhere...
+From: Adobe Acrobat <mail@mail.adobe.com>
+📂 Category: Promotions
+
+--- Processing email 13/50 ---
+Subject: An unknown device or browser has been used to access your ac...
+From: Upwork Notification <donotreply@upwork.com>
+📂 Category: Important
+
+--- Processing email 14/50 ---
+Subject: Your 7-step AI upskilling roadmap...
+From: Fahim at Educative <fahim.u@educative.io>
+📂 Category: Newsletters
+Error determining response need: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4 in organization org-7rF0nKyyQWYXcRts74Nh3dFb on tokens per min (TPM): Limit 10000, Used 10000, Requested 167. Please try again in 1.002s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+--- Processing email 15/50 ---
+Subject: Super Saver Sale for closeiq...
+From: "Design.com" <maker@hello.design.com>
+📂 Category: Promotions
+Error determining response need: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4 in organization org-7rF0nKyyQWYXcRts74Nh3dFb on tokens per min (TPM): Limit 10000, Used 10000, Requested 209. Please try again in 1.254s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+--- Processing email 16/50 ---
+Subject: Design’s latest obsession, the AI tool you didn’t know you n...
+From: Envato Market <news@m.market.envato.com>
+📂 Category: Newsletters
+Error detecting meeting request: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4 in organization org-7rF0nKyyQWYXcRts74Nh3dFb on tokens per min (TPM): Limit 10000, Used 8847, Requested 1630. Please try again in 2.862s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+--- Processing email 17/50 ---
+Subject: Submit Your Financial Documents...
+From: University of Bridgeport <international@bridgeport.edu>
+📂 Category: Important
+✍️ Generating response...
+📝 Response generated (723 characters)
+
+--- Processing email 18/50 ---
+Subject: Why Japanese Developers Write Code Completely Differently (A...
+From: Medium Daily Digest <noreply@medium.com>
+📂 Category: Newsletters
+
+--- Processing email 19/50 ---
+Subject: Last chance to share your thoughts & win a creator pack...
+From: Vinh Giang <support@vinhgiang.com>
+📂 Category: Promotions
+
+--- Processing email 20/50 ---
+Subject: “I want to find community.”...
+From: YouVersion <no-reply@youversion.com>
+📂 Category: Newsletters
+
+--- Processing email 21/50 ---
+Subject: Prosus eyes food delivery empire in Europe...
+From: Victoria from Techpoint <techpoint@digest.bfnewsletters.com>
+📂 Category: Newsletters
+
+--- Processing email 22/50 ---
+Subject: Yep, your HeyGen toolkit just got faster...
+From: HeyGen <no_reply@email.heygen.com>
+📂 Category: Promotions
+📅 Meeting request detected!
+
+--- Processing email 23/50 ---
+Subject: [Update] Post-UTME Forms So Far...
+From: Myschool <dont-reply@myschool.com.ng>
+📂 Category: Newsletters
+
+--- Processing email 24/50 ---
+Subject: Important Final Reminder: 3 Days Until Yellow Card Changes...
+From: Yellow Card Support <support@info.yellowcard.io>
+📂 Category: Important
+
+--- Processing email 25/50 ---
+Subject: You have 33 notifications about Liam and others...
+From: Facebook <notification@priority.facebookmail.com>
+📂 Category: Personal
+
+--- Processing email 26/50 ---
+Subject: You are invited to Off Season Festival...
+From: Hubert Thieblot <hthieblot@user.luma-mail.com>
+📂 Category: Promotions
+📅 Meeting request detected!
+
+--- Processing email 27/50 ---
+Subject: [ngrok news] New: Call LLMs or internal services from your g...
+From: "Joel @ ngrok" <team@m.ngrok.com>
+📂 Category: Newsletters
+Error detecting meeting request: Error code: 400 - {'error': {'message': "This model's maximum context length is 8192 tokens. However, your messages resulted in 10785 tokens. Please reduce the length of the messages.", 'type': 'invalid_request_error', 'param': 'messages', 'code': 'context_length_exceeded'}}
+
+--- Processing email 28/50 ---
+Subject: 🧠 AI in your closet...
+From: The Frontier by Product Hunt <hi@deeperlearning.producthunt.com>
+📂 Category: Newsletters
+
+--- Processing email 29/50 ---
+Subject: Java at scale: How the big companies do it...
+From: Marc at Frontend Masters <marc@frontendmasters.com>
+📂 Category: Newsletters
+
+--- Processing email 30/50 ---
+Subject: Build Your RAG Pipeline in 5 Steps - No Code Required...
+From: DigitalOcean <team@info.digitalocean.com>
+📂 Category: Promotions
+
+--- Processing email 31/50 ---
+Subject: Job Alert: Don't miss these openings...
+From: "InfoAge Solutions (IAS) " <infoage-solutions-ias-59451@alert.refer.io>
+📂 Category: Promotions
+
+--- Processing email 32/50 ---
+Subject: You have 10+ new invitations...
+From: LinkedIn <notifications-noreply@linkedin.com>
+📂 Category: Promotions
+
+--- Processing email 33/50 ---
+Subject: Do you really need Acely?...
+From: Acely <info@m.acely.ai>
+📂 Category: Promotions
+
+--- Processing email 34/50 ---
+Subject: Grow your app with $0 doing exactly THIS...
+From: Jacob Rodri <hi@jacobrodri.pro>
+📂 Category: Promotions
+
+--- Processing email 35/50 ---
+Subject: A new launch from Tiptap!...
+From: Product Hunt <hello@producthunt.com>
+📂 Category: Newsletters
+
+--- Processing email 36/50 ---
+Subject: Lapo Vs Nepo and Crypto Gossip for you Favour...
+From: Jay from Kochure <jay@kochure.com>
+📂 Category: Newsletters
+
+--- Processing email 37/50 ---
+Subject: 🚀 Join the OKX ETHCC Hackathon and help Shape the Future of ...
+From: Propel <support@propel.io>
+📂 Category: Promotions
+
+--- Processing email 38/50 ---
+Subject: Action required: Please review your contact information...
+From: Namecheap Support <support@namecheap.com>
+📂 Category: Important
+Error determining response need: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4 in organization org-7rF0nKyyQWYXcRts74Nh3dFb on tokens per min (TPM): Limit 10000, Used 10000, Requested 202. Please try again in 1.212s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+--- Processing email 39/50 ---
+Subject: The 2025 Dev Survey results are in...
+From: Stack Overflow <do-not-reply@hello.stackoverflow.email>
+📂 Category: Newsletters
+
+--- Processing email 40/50 ---
+Subject: [Google AI Developers Forum] Summary...
+From: Google AI Developers Forum <notifications@discuss.ai.google.dev>
+📂 Category: Newsletters
+
+--- Processing email 41/50 ---
+Subject: 💼 Your connection, Yetunde, just started a new job! Check in...
+From: LinkedIn <messages-noreply@linkedin.com>
+📂 Category: Newsletters
+
+--- Processing email 42/50 ---
+Subject: KeenIELTS Verification Code...
+From: KeenIELTS <notifications@zepto.keenielts.com>
+📂 Category: Important
+
+--- Processing email 43/50 ---
+Subject: How College Admissions Decisions Are Made...
+From: Ethan Sawyer <info@collegeessayguy.com>
+📂 Category: Newsletters
+Error determining response need: Error code: 429 - {'error': {'message': 'Rate limit reached for gpt-4 in organization org-7rF0nKyyQWYXcRts74Nh3dFb on tokens per min (TPM): Limit 10000, Used 10000, Requested 168. Please try again in 1.007s. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+--- Processing email 44/50 ---
+Subject: EIU Arrival Information - Fall 2025...
+From: Eastern Illinois University <international@eiu.edu>
+📂 Category: Personal
+Error detecting meeting request: Error code: 429 - {'error': {'message': 'Request too large for gpt-4 in organization org-7rF0nKyyQWYXcRts74Nh3dFb on tokens per min (TPM): Limit 10000, Requested 14378. The input or output tokens must be reduced in order to run successfully. Visit https://platform.openai.com/account/rate-limits to learn more.', 'type': 'tokens', 'param': None, 'code': 'rate_limit_exceeded'}}
+
+--- Processing email 45/50 ---
+Subject: #PayWithPocketApp, now on FoodCourt ⚡️...
+From: PocketApp <no-reply@pocketapp.com>
+📂 Category: Promotions
+
+--- Processing email 46/50 ---
+Subject: Transfer Successful...
+From: OPay <no-reply@opay-nigeria.com>
+📂 Category: Personal
+
+--- Processing email 47/50 ---
+Subject: 🦎🚀 A decentralized treasury strategy for decentralized asset...
+From: CoinGecko <hello@coingecko.com>
+📂 Category: Newsletters
+
+--- Processing email 48/50 ---
+Subject: AI is the Future - Help Someone You Love Get In...
+From: The Incubator Hub <info@theincubatorng.org>
+📂 Category: Promotions
+
+--- Processing email 49/50 ---
+Subject: I’m Addicted to Social Media — And I’m Fighting Back...
+From: Serg <fast-makers@mail.beehiiv.com>
+📂 Category: Newsletters
+
+--- Processing email 50/50 ---
+Subject: Unlock Your Data's Potential: Join Our Free MongoDB Webinar ...
+From: MongoDB <mongodbteam@messages.mongodb.com>
+📂 Category: Promotions
+📅 Meeting request detected!
+
+📋 PROCESSING SUMMARY
+==================================================
+📊 Categories:
+   Important: 5
+   Newsletters: 25
+   Personal: 3
+   Promotions: 17
+
+📅 Meeting requests detected: 4
+✍️ Emails requiring responses: 1
+
+🎬 DEMO DETAILS
+==================================================
+
+--- Email 1 ---
+Subject: Wednesday Wahala Jide’s Is Back at it!
+Category: Newsletters
+Meeting Request: No
+Needs Response: No
+
+--- Email 2 ---
+Subject: .
+Category: Promotions
+Meeting Request: No
+Needs Response: No
+
+--- Email 3 ---
+Subject: CodeSquad 2026 Admission Process
+Category: Promotions
+Meeting Request: Yes
+Needs Response: No
+
+--- Email 4 ---
+Subject: Favour, you’re on a roll on LinkedIn!
+Category: Newsletters
+Meeting Request: No
+Needs Response: No
+
+--- Email 5 ---
+Subject: swipe right
+Category: Newsletters
+Meeting Request: No
+Needs Response: No
