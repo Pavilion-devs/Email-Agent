@@ -84,9 +84,6 @@ Google sends a webhook notification to your backend whenever a new email arrives
 
 Endpoint example:
 
-bash
-Copy
-Edit
 POST /gmail-webhook
 {
   "email_id": "12345",
@@ -96,7 +93,7 @@ Then call Gmail API users.messages.get with format=metadata to fetch:
 
 Subject, Sender, Snippet (not full body yet).
 
-Step 2: Pre-Filter Without GPT
+Step 2: Pre-Filter + Gemini 1.5 flash 
 Use rule-based logic for first pass (free & fast):
 
 Check Gmail labels: If labeled Important by Gmail → forward.
@@ -117,9 +114,9 @@ Edit
 From: Andrew | CodeSquad
 Subject: Admission Process
 Action: [Reply] [Schedule] [Ignore]
-Inline buttons: Reply → triggers GPT for draft, Schedule → triggers calendar check.
+Inline buttons: Reply → triggers Gemini for draft, Schedule → triggers calendar check.
 
-Step 4: On-Demand GPT Calls
+Step 4: On-Demand Gemini Calls
 Only when user clicks Reply or Schedule:
 
 Fetch full email body from Gmail.
@@ -131,12 +128,11 @@ Send draft back to Telegram for approval.
 ✅ Cost Control
 Rule-based filtering first = zero GPT cost for 90% of emails.
 
-GPT is only used for reply drafting or meeting scheduling when user requests.
+Gemini is only used for reply drafting or meeting scheduling when user requests.
 
 No batch calls = no 50× GPT charges.
 
 ✅ Best Tech Stack
-Backend: FastAPI or Flask
 
 Agent Framework: Langchain
 
