@@ -140,6 +140,9 @@ def main():
     # Handle Ctrl+C gracefully
     signal.signal(signal.SIGINT, signal_handler)
     
+    # Load environment variables first
+    load_dotenv()
+    
     # Check environment
     if not os.getenv('TELEGRAM_BOT_TOKEN'):
         print("❌ TELEGRAM_BOT_TOKEN not found in .env file")
