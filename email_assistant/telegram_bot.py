@@ -316,7 +316,7 @@ class SmartEmailFilter:
     
     def __init__(self):
         """Initialize the smart filter."""
-        self.notification_categories = ['Important', 'Meetings']
+        self.notification_categories = ['Important', 'Meetings', 'Personal']
         self.urgent_keywords = ['urgent', 'action required', 'deadline', 'expires', 'verify', 'security']
     
     def should_notify(self, email_data: Dict) -> bool:
@@ -327,14 +327,14 @@ class SmartEmailFilter:
         sender = email_data.get('sender', '').lower()
         is_meeting = email_data.get('is_meeting_request', False)
         
-        # STRICT FILTERING: Only Important emails and Meeting requests
-        # This prevents newsletters/promotions from getting through
+        # FILTERING: Important emails, Meeting requests, and Personal emails
+        # This prevents only newsletters/promotions from getting through
         
         # Always notify for Meeting requests
         if is_meeting or category == 'Meetings':
             return True
         
-        # Only notify for Important emails (but not if they're newsletters/promotions)
+        # Notify for Important emails (but not if they're newsletters/promotions)
         if category == 'Important':
             # Double-check: Don't notify if it's actually a newsletter/promotion
             # that was misclassified as Important
@@ -349,8 +349,11 @@ class SmartEmailFilter:
             
             return True
         
-        # Don't notify for newsletters, promotions, or personal emails
-        # Remove all other notification triggers to ensure only Important + Meetings get through
+        # Allow Personal emails (these can be important business communications)
+        if category == 'Personal':
+            return True
+        
+        # Don't notify for newsletters and promotions only
         return False
     
     def get_notification_priority(self, email_data: Dict) -> str:

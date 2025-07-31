@@ -83,16 +83,7 @@ class TelegramEmailHandler:
                     priority = self.filter.get_notification_priority(email)
                     print(f"   📲 Sent {priority} priority notification: {email.get('subject', 'No Subject')[:40]}...")
         
-        if notification_count > 0:
-            summary_message = f"""📊 *Email Processing Complete*
-
-✅ Processed: {len(emails)} emails  
-📱 Notifications sent: {notification_count}
-🔇 Filtered out: {len(emails) - notification_count}
-
-Only important emails were sent to avoid notification spam."""
-            
-            self.bot.send_message(summary_message)
+        # No summary message needed for real-time processing
         
         return notification_count
     
@@ -146,6 +137,19 @@ Only important emails were sent to avoid notification spam."""
         parts = callback_data.split('_')
         action = parts[0]
         email_id = parts[1] if len(parts) > 1 else None
+        
+        # Debug: Check if email exists in cache
+        if email_id:
+            if email_id in self.email_cache:
+                print(f"✅ Email {email_id} found in cache")
+            else:
+                print(f"❌ Email {email_id} NOT found in cache. Available IDs: {list(self.email_cache.keys())}")
+                # Try to reload cache from file
+                self.email_cache = self._load_cache(self.cache_file)
+                if email_id in self.email_cache:
+                    print(f"✅ Email {email_id} found after reloading cache")
+                else:
+                    print(f"❌ Email {email_id} still not found after reloading")
         
         # Answer the callback query first (removes loading state)
         self._answer_callback_query(query_id)
