@@ -8,4 +8,4 @@ telegram_email_cache.pkl
 claude.md
 prd.txt
 observation.txt
-email_assistant/__pycache__/
+email_assistant/__pycache__/.DS_Store
