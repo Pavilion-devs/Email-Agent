@@ -1,0 +1,11 @@
+.env
+.env.example
+calendar_credentials.json
+credentials.json
+token.json
+requirements.txt
+telegram_email_cache.pkl
+claude.md
+prd.txt
+observation.txt
+email_assistant/__pycache__/
