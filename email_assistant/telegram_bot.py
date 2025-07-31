@@ -327,23 +327,30 @@ class SmartEmailFilter:
         sender = email_data.get('sender', '').lower()
         is_meeting = email_data.get('is_meeting_request', False)
         
-        # Always notify for Important emails
-        if category == 'Important':
-            return True
+        # STRICT FILTERING: Only Important emails and Meeting requests
+        # This prevents newsletters/promotions from getting through
         
         # Always notify for Meeting requests
         if is_meeting or category == 'Meetings':
             return True
         
-        # Notify for urgent emails regardless of category
-        if any(keyword in subject for keyword in self.urgent_keywords):
+        # Only notify for Important emails (but not if they're newsletters/promotions)
+        if category == 'Important':
+            # Double-check: Don't notify if it's actually a newsletter/promotion
+            # that was misclassified as Important
+            newsletter_indicators = ['newsletter', 'unsubscribe', 'marketing', 'promotional']
+            promotion_indicators = ['sale', 'discount', 'offer', '% off', 'deal', 'shop now']
+            
+            if any(indicator in subject for indicator in newsletter_indicators + promotion_indicators):
+                return False
+            
+            if any(indicator in sender for indicator in newsletter_indicators + promotion_indicators):
+                return False
+            
             return True
         
-        # Notify for university/education emails (these are often time-sensitive)
-        if any(domain in sender for domain in ['.edu', 'university', 'college', 'school']):
-            return True
-        
-        # Don't notify for newsletters, promotions, or personal (unless they meet above criteria)
+        # Don't notify for newsletters, promotions, or personal emails
+        # Remove all other notification triggers to ensure only Important + Meetings get through
         return False
     
     def get_notification_priority(self, email_data: Dict) -> str:

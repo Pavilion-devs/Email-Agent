@@ -2,7 +2,8 @@
 
 import os
 import json
-import asyncio
+import time
+import pickle
 from typing import Dict, List, Optional
 import requests
 from datetime import datetime, timedelta
@@ -34,9 +35,33 @@ class TelegramEmailHandler:
             print(f"Warning: Calendar client not available: {e}")
             self.calendar_client = None
         
-        # In-memory storage for email data (in production, use Redis or database)
-        self.email_cache = {}
-        self.pending_responses = {}
+        # Persistent storage for email data using pickle files
+        self.cache_file = 'telegram_email_cache.pkl'
+        self.responses_file = 'telegram_responses_cache.pkl'
+        
+        # Load existing cache data
+        self.email_cache = self._load_cache(self.cache_file)
+        self.pending_responses = self._load_cache(self.responses_file)
+    
+    def _load_cache(self, filename: str) -> dict:
+        """Load cache data from pickle file."""
+        try:
+            if os.path.exists(filename):
+                with open(filename, 'rb') as f:
+                    data = pickle.load(f)
+                print(f"📂 Loaded {len(data)} items from {filename}")
+                return data
+        except Exception as e:
+            print(f"⚠️  Could not load cache {filename}: {e}")
+        return {}
+    
+    def _save_cache(self, data: dict, filename: str):
+        """Save cache data to pickle file."""
+        try:
+            with open(filename, 'wb') as f:
+                pickle.dump(data, f)
+        except Exception as e:
+            print(f"⚠️  Could not save cache {filename}: {e}")
     
     def process_important_emails(self, emails: List[Dict]) -> int:
         """Process emails and send notifications for important ones."""
@@ -49,6 +74,7 @@ class TelegramEmailHandler:
                 # Cache email data for callback handling
                 email_id = email.get('id')
                 self.email_cache[email_id] = email
+                self._save_cache(self.email_cache, self.cache_file)
                 
                 # Send notification
                 success = self.bot.send_email_notification(email, include_actions=True)
@@ -99,14 +125,14 @@ Only important emails were sent to avoid notification spam."""
                             self._handle_message(update['message'])
                 
                 # Small delay to prevent hammering the API
-                asyncio.sleep(1)
+                time.sleep(1)
                 
             except KeyboardInterrupt:
                 print("\n⛔ Stopping Telegram bot polling...")
                 break
             except Exception as e:
                 print(f"❌ Polling error: {e}")
-                asyncio.sleep(5)  # Wait longer on error
+                time.sleep(5)  # Wait longer on error
     
     def _handle_callback_query(self, callback_query: Dict):
         """Handle button press callbacks."""
@@ -196,6 +222,7 @@ Add this to your .env file if not already configured.""".format(chat_id)
             }
             
             self.email_cache['test_123'] = test_email
+            self._save_cache(self.email_cache, self.cache_file)
             self.bot.send_email_notification(test_email, include_actions=True)
     
     def _answer_callback_query(self, query_id: str, text: str = "Processing..."):
@@ -223,6 +250,7 @@ Add this to your .env file if not already configured.""".format(chat_id)
             
             # Store for potential sending
             self.pending_responses[email_id] = response
+            self._save_cache(self.pending_responses, self.responses_file)
             
             # Send preview
             self.bot.send_response_preview(email_data, response)
@@ -289,6 +317,7 @@ Add this to your .env file if not already configured.""".format(chat_id)
         # Remove from cache to free memory
         if email_id in self.email_cache:
             del self.email_cache[email_id]
+            self._save_cache(self.email_cache, self.cache_file)
     
     def _handle_done_action(self, email_id: str, chat_id: str):
         """Handle mark done action."""
@@ -297,6 +326,7 @@ Add this to your .env file if not already configured.""".format(chat_id)
         # Remove from cache
         if email_id in self.email_cache:
             del self.email_cache[email_id]
+            self._save_cache(self.email_cache, self.cache_file)
     
     def _handle_send_action(self, email_id: str, chat_id: str):
         """Handle send response action."""
@@ -334,8 +364,10 @@ Add this to your .env file if not already configured.""".format(chat_id)
                 # Clean up
                 if email_id in self.email_cache:
                     del self.email_cache[email_id]
+                    self._save_cache(self.email_cache, self.cache_file)
                 if email_id in self.pending_responses:
                     del self.pending_responses[email_id]
+                    self._save_cache(self.pending_responses, self.responses_file)
             else:
                 self.bot.send_message("❌ Failed to send email. Please try again.")
                 
@@ -349,6 +381,7 @@ Add this to your .env file if not already configured.""".format(chat_id)
         # Clean up pending response
         if email_id in self.pending_responses:
             del self.pending_responses[email_id]
+            self._save_cache(self.pending_responses, self.responses_file)
     
     def _handle_time_selection(self, email_id: str, time_index: int, chat_id: str):
         """Handle meeting time selection."""
@@ -396,6 +429,7 @@ Add this to your .env file if not already configured.""".format(chat_id)
                     
                     # Store for potential sending
                     self.pending_responses[email_id] = response
+                    self._save_cache(self.pending_responses, self.responses_file)
                     
                     self.bot.send_success_message("scheduled", f"""Meeting scheduled for {selected_time['formatted_start']}
                     
