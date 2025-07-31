@@ -5,7 +5,7 @@ import json
 from datetime import datetime
 from typing import List, Dict, Tuple
 from .email_fetcher import EmailFetcher
-from .hybrid_agents import HybridEmailCategorizerAgent, CostOptimizedResponderAgent, CostOptimizedMeetingAgent
+from .ollama_agents import OllamaEmailCategorizerAgent, OllamaEmailResponderAgent, OllamaMeetingSchedulerAgent
 from .gmail_client import GmailClient
 from .calendar_client import CalendarClient
 
@@ -18,9 +18,9 @@ class EmailAssistantController:
         
         # Initialize components
         self.email_fetcher = EmailFetcher()
-        self.categorizer_agent = HybridEmailCategorizerAgent()
-        self.responder_agent = CostOptimizedResponderAgent()
-        self.scheduler_agent = CostOptimizedMeetingAgent()
+        self.categorizer_agent = OllamaEmailCategorizerAgent()
+        self.responder_agent = OllamaEmailResponderAgent()
+        self.scheduler_agent = OllamaMeetingSchedulerAgent()
         
         # Initialize API clients
         self.gmail_client = self.email_fetcher.gmail_client
@@ -88,14 +88,13 @@ class EmailAssistantController:
             processed_email = self.email_fetcher.prepare_email_for_processing(email)
             
             # Step 1: Categorize email
-            categorization_result = self.categorizer_agent.categorize_email(processed_email)
-            processed_email['ai_category'] = categorization_result['category']
-            processed_email['categorization_method'] = categorization_result['method']
-            processed_email['processing_cost'] = categorization_result['cost']
+            category = self.categorizer_agent.categorize_email(processed_email)
+            processed_email['ai_category'] = category
+            processed_email['categorization_method'] = 'ollama-local'
+            processed_email['processing_cost'] = 0.0  # FREE!
             
-            print(f"📂 Category: {categorization_result['category']} ({categorization_result['method']})")
-            if categorization_result['cost'] > 0:
-                print(f"💰 Cost: ${categorization_result['cost']:.4f}")
+            print(f"📂 Category: {category} (ollama-local)")
+            print(f"💰 Cost: FREE 🦙")
             
             # Step 2: Check if meeting request
             is_meeting = self.scheduler_agent.is_meeting_request(processed_email)
