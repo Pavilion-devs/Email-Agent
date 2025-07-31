@@ -6,6 +6,7 @@ from datetime import datetime
 from typing import List, Dict, Tuple
 from .email_fetcher import EmailFetcher
 from .ollama_agents import OllamaEmailCategorizerAgent, OllamaEmailResponderAgent, OllamaMeetingSchedulerAgent
+from .telegram_handler import TelegramEmailHandler
 from .gmail_client import GmailClient
 from .calendar_client import CalendarClient
 
@@ -21,6 +22,14 @@ class EmailAssistantController:
         self.categorizer_agent = OllamaEmailCategorizerAgent()
         self.responder_agent = OllamaEmailResponderAgent()
         self.scheduler_agent = OllamaMeetingSchedulerAgent()
+        
+        # Initialize Telegram integration
+        try:
+            self.telegram_handler = TelegramEmailHandler()
+            print("📱 Telegram integration enabled")
+        except Exception as e:
+            print(f"⚠️  Telegram integration disabled: {e}")
+            self.telegram_handler = None
         
         # Initialize API clients
         self.gmail_client = self.email_fetcher.gmail_client
@@ -162,6 +171,14 @@ class EmailAssistantController:
         
         print(f"\n📅 Meeting requests detected: {meeting_count}")
         print(f"✍️ Emails requiring responses: {response_count}")
+        
+        # Send Telegram notifications for important emails
+        if self.telegram_handler:
+            try:
+                notification_count = self.telegram_handler.process_important_emails(results)
+                print(f"📱 Telegram notifications sent: {notification_count}")
+            except Exception as e:
+                print(f"❌ Telegram notification error: {e}")
         
         # Show detailed results for demo
         if self.demo_mode:
