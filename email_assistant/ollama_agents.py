@@ -80,7 +80,8 @@ Respond with ONLY the category name from the list above."""
             response = self._call_ollama(prompt, max_tokens=20)
             
             # Clean and validate response
-            category = response.strip().title()
+            raw_response = response.strip()
+            category = raw_response.title()
             
             # Handle common variations
             if 'newsletter' in category.lower() or 'news' in category.lower():
