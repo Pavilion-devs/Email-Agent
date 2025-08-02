@@ -70,7 +70,15 @@ class TelegramEmailHandler:
         print("\n📱 Processing emails for Telegram notifications...")
         
         for email in emails:
-            if self.filter.should_notify(email):
+            category = email.get('ai_category', 'Unknown')
+            subject = email.get('subject', 'No Subject')[:40]
+            
+            print(f"🔍 PROCESSING: '{subject}...' (Category: {category})")
+            
+            should_notify = self.filter.should_notify(email)
+            print(f"   Filter Decision: {'✅ NOTIFY' if should_notify else '❌ BLOCK'}")
+            
+            if should_notify:
                 # Cache email data for callback handling
                 email_id = email.get('id')
                 self.email_cache[email_id] = email
@@ -81,7 +89,9 @@ class TelegramEmailHandler:
                 if success:
                     notification_count += 1
                     priority = self.filter.get_notification_priority(email)
-                    print(f"   📲 Sent {priority} priority notification: {email.get('subject', 'No Subject')[:40]}...")
+                    print(f"   📲 Sent {priority} priority notification: {subject}...")
+            else:
+                print(f"   🔇 Blocked notification for: {subject}...")
         
         # No summary message needed for real-time processing
         

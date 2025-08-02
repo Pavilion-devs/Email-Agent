@@ -43,6 +43,14 @@ def test_full_pipeline():
             'sender': 'Pat @ Starter Story <pat@starterstory.com>',
             'snippet': 'Read time: 1 min. 18 sec. I talked to a founder the other day who made me laugh. He said when he just started out, everyone told him his idea was sill...',
             'body': 'Personal business email content...'
+        },
+        # Add the specific promotional email from the screenshot
+        {
+            'id': 'test_4',
+            'subject': 'Top of the day',
+            'sender': 'Kamiye <kamiye669@gmail.com>',
+            'snippet': '31 July Which will you be? The good news is we\'ve got ways for you to be both. We don\'t mind being like Smokey Bear this week by saying, &quot...',
+            'body': 'Promotional content about climate change and efficiency...'
         }
     ]
     
@@ -78,5 +86,64 @@ def test_full_pipeline():
         
         print()
 
+def test_promotional_email_variations():
+    """Test different variations of the promotional email to see if AI categorization is inconsistent."""
+    
+    print("\n🔍 TESTING PROMOTIONAL EMAIL VARIATIONS")
+    print("=" * 60)
+    
+    categorizer = OllamaEmailCategorizerAgent()
+    filter_agent = SmartEmailFilter()
+    
+    # Test different variations of the problematic email
+    variations = [
+        {
+            'subject': 'Top of the day',
+            'sender': 'Kamiye <kamiye669@gmail.com>',
+            'snippet': '31 July Which will you be? The good news is we\'ve got ways for you to be both.',
+            'body': 'Promotional content about climate change and efficiency...'
+        },
+        {
+            'subject': 'Top of the day',
+            'sender': 'Kamiye <kamiye669@gmail.com>',
+            'snippet': '31 July Which will you be? The good news is we\'ve got ways for you to be both. We don\'t mind being like Smokey Bear this week by saying, &quot...',
+            'body': 'Promotional content about climate change and efficiency...'
+        },
+        {
+            'subject': 'Top of the day',
+            'sender': 'Kamiye <kamiye669@gmail.com>',
+            'snippet': '31 July Which will you be? The good news is we\'ve got ways for you to be both. We don\'t mind being like Smokey Bear this week by saying, "Only you can prevent climate change." But seriously, the good news is we\'ve got ways for you to be both.',
+            'body': 'Promotional content about climate change and efficiency...'
+        }
+    ]
+    
+    for i, email in enumerate(variations, 1):
+        print(f"\n📧 VARIATION {i}: {email['subject']}")
+        print("-" * 40)
+        
+        # Test categorization multiple times to check consistency
+        categories = []
+        for j in range(3):
+            category = categorizer.categorize_email(email)
+            categories.append(category)
+            print(f"   Run {j+1}: {category}")
+        
+        # Check if categorization is consistent
+        if len(set(categories)) == 1:
+            print(f"   ✅ Consistent categorization: {categories[0]}")
+        else:
+            print(f"   ❌ Inconsistent categorization: {categories}")
+        
+        # Test filtering with the most common category
+        most_common = max(set(categories), key=categories.count)
+        email['ai_category'] = most_common
+        email['is_meeting_request'] = False
+        
+        should_notify = filter_agent.should_notify(email)
+        print(f"   Filter Decision: {'✅ NOTIFY' if should_notify else '❌ BLOCK'}")
+        
+        print()
+
 if __name__ == "__main__":
     test_full_pipeline()
+    test_promotional_email_variations()

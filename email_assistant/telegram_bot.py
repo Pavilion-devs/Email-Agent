@@ -327,6 +327,8 @@ class SmartEmailFilter:
         sender = email_data.get('sender', '').lower()
         is_meeting = email_data.get('is_meeting_request', False)
         
+        print(f"   🔍 FILTER: Category='{category}', Meeting={is_meeting}")
+        
         # FILTERING: Important emails, Meeting requests, and Personal emails
         # This prevents only newsletters/promotions from getting through
         

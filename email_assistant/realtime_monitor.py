@@ -228,16 +228,36 @@ class RealTimeEmailMonitor:
             print(f"❌ Error processing new emails: {e}")
     
     def _is_meeting_request(self, email_data: Dict) -> bool:
-        """Check if email is a meeting request."""
+        """Check if email is a meeting request using precise keyword matching."""
         subject = email_data.get('subject', '').lower()
         body = email_data.get('body', email_data.get('snippet', '')).lower()
         
-        meeting_keywords = [
-            'meeting', 'call', 'conference', 'zoom', 'teams', 'webinar',
-            'appointment', 'schedule', 'calendar', 'invite', 'invitation'
+        # More precise meeting keywords to avoid false positives
+        precise_meeting_keywords = [
+            'schedule a meeting', 'schedule meeting', 'meeting request', 
+            'meeting invitation', 'calendar invite', 'zoom meeting',
+            'teams meeting', 'conference call', 'video call',
+            'phone meeting', 'appointment request', 'book a call',
+            'schedule a call', 'meeting tomorrow', 'meeting today',
+            'join the meeting', 'meeting link', 'meeting at'
         ]
         
-        return any(keyword in subject or keyword in body for keyword in meeting_keywords)
+        # Check for precise phrases first
+        text_to_check = f"{subject} {body}"
+        if any(phrase in text_to_check for phrase in precise_meeting_keywords):
+            return True
+        
+        # Only check individual keywords if they appear in meeting-like context
+        individual_keywords = ['meeting', 'appointment', 'webinar']
+        sender = email_data.get('sender', '').lower()
+        
+        # Exclude promotional/newsletter senders even if they contain meeting words
+        promotional_domains = ['noreply', 'newsletter', 'marketing', 'promo', 'mail.']
+        if any(domain in sender for domain in promotional_domains):
+            return False
+        
+        # Check individual keywords only in subject (more reliable than body)
+        return any(keyword in subject for keyword in individual_keywords)
     
     def get_status(self) -> Dict:
         """Get current monitoring status."""
