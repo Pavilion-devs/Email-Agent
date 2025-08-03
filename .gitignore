@@ -4,6 +4,7 @@
 .env.local
 .env.production
 
+
 # Google OAuth credentials
 calendar_credentials.json
 credentials.json
@@ -13,6 +14,9 @@ calendar_token.json
 # API keys and sensitive data
 requirements.txt
 telegram_email_cache.pkl
+debug_filter.py
+test_realtime_filter.py
+restart_with_clean_cache.py
 
 # Documentation files
 claude.md
@@ -39,3 +43,4 @@ __pycache__/
 # Logs
 *.log
 logs/
+
